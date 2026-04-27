@@ -34,7 +34,7 @@ export default function Home() {
 
   const skills = {
     frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript", "HTML/CSS"],
-    backend: ["Node.js", "Express.js", "MongoDB", "MySQL", "REST API", "Firebase"],
+    backend: ["Django","Node.js", "Express.js", "MongoDB", "PostgreSQL",, "Firebase"],
     tools: ["Git", "GitHub", "VS Code", "Postman", "Figma", "Docker"],
   };
 
@@ -45,7 +45,7 @@ export default function Home() {
       {/* HERO */}
       <section
         id="home"
-        className="mt-10 min-h-screen flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 lg:px-16 py-12 gap-10"
+        className="mt-10 min-h-screen scroll-mt-17 flex flex-col lg:flex-row items-center justify-center px-4 sm:px-6 lg:px-16 py-12 gap-10"
       >
         {/* LEFT */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
@@ -77,16 +77,22 @@ export default function Home() {
           </p>
 
           {/* Tech Buttons */}
-          <div className="mt-6 flex flex-wrap justify-center lg:justify-start">
-            {["Next.js", "React", "MongoDB", "PostgreSQL", "Postman"].map((tech) => (
-              <button
-                key={tech}
-                className="cursor-pointer m-1 px-4 py-1 rounded-full border border-gray-300 text-white hover:bg-green-600 hover:text-white transition duration-300 hover:scale-105"
-              >
-                {tech}
-              </button>
-            ))}
-          </div>
+         <div className="mt-6 flex flex-wrap justify-center sm:justify-center md:justify-start gap-2">
+  {["Next.js", "React", "Tailwind CSS", "TypeScript", "Bootstrap"].map((tech) => (
+    <button
+      key={tech}
+      className="
+        cursor-pointer
+        px-3 py-1 text-sm
+        sm:px-4 sm:py-1.5 sm:text-base
+        rounded-full border border-gray-300 text-white
+        hover:bg-green-600 transition duration-300 hover:scale-105
+      "
+    >
+      {tech}
+    </button>
+  ))}
+</div>
 
           {/* Action Buttons */}
           <div className="mt-8 flex justify-center lg:justify-start gap-4 flex-wrap">
@@ -113,12 +119,23 @@ export default function Home() {
         </div>
 
         {/* RIGHT IMAGE */}
-     <div className="relative flex items-center justify-center w-full lg:w-1/2">
+   <div className="relative flex items-center justify-center w-full lg:w-1/2">
+
   {/* Background Circle */}
-  <div className="absolute  w-[250px] h-[240px] lg:w-[473px] lg:h-[473px] bg-slate-400 rounded-full right-[30px] lg:right-[-5px] top-0 lg:top-[-25px]"></div>
+  <div
+  className="hidden md:block absolute 
+  w-[250px] h-[240px] lg:w-[473px] lg:h-[473px] 
+  bg-slate-400 rounded-full
+  top-1/2 left-1/2
+  -translate-x-[30%] -translate-y-[50%]"
+></div>
 
   {/* Profile Image Circle */}
-  <div className="relative w-[249px] h-[248px] lg:w-[408px] lg:h-[408px] rounded-full  overflow-hidden shadow-2xl">
+  <div
+    className="relative 
+    w-[249px] h-[248px] lg:w-[408px] lg:h-[408px] 
+    rounded-full overflow-hidden shadow-2xl
+  ">
     <Image
       src={developer}
       alt="profile"
@@ -133,7 +150,7 @@ export default function Home() {
       {/* ABOUT */}
     <section
   id="about"
-  className="w-full min-h-screen scroll-mt-20 bg-[#020617] py-12 sm:py-16 px-3 sm:px-6 md:px-10 lg:px-16"
+  className="w-full min-h-screen scroll-mt-15 bg-[#020617] py-12 sm:py-16 px-3 sm:px-6 md:px-10 lg:px-16"
 >
   <div className="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
     
@@ -236,7 +253,7 @@ export default function Home() {
       {/* WORK */}
 <section
   id="work"
-  className="scroll-mt-20 px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-12"
+  className="scroll-mt-18 px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-12"
 >
   <div className=" mx-auto space-y-8">
     <WorkPage />
@@ -246,7 +263,7 @@ export default function Home() {
       {/* CONTACT */}
       <section
   id="contact"
-  className="min-h-screen text-white px-4 sm:px-6 md:px-10 lg:px-16  scroll-mt-20"
+  className="min-h-screen text-white px-4 sm:px-6 md:px-10 lg:px-16  scroll-mt-18"
 >
  
 

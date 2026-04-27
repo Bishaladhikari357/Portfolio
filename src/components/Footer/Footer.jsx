@@ -6,7 +6,7 @@ import { FaHeart } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-[#0b1220] to-[#020617] text-gray-400 border-t border-gray-800 mt-20">
+    <footer className="bg-gradient-to-b  text-gray-400 border-t border-gray-800">
       <div className="max-w-8xl mx-auto px-6 md:px-16 py-12">
         
         {/* TOP SECTION */}
