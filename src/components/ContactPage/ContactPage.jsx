@@ -1,25 +1,36 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
   const form = useRef();
+
+  // 👇 added loading state
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const sendEmail = (e) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        "service_bebxxqs",   // ✅ your SERVICE ID
-        "template_biezc9m",  // ✅ your TEMPLATE ID
+        "service_bebxxqs",
+        "template_biezc9m",
         form.current,
-        "JdHeYzQ1nJcYNL86r"  // ✅ your PUBLIC KEY
+        "JdHeYzQ1nJcYNL86r"
       )
       .then(
         () => {
           alert("Message sent successfully ✅");
-          form.current.reset(); // clear form after submit
+          form.current.reset();
         },
         (error) => {
           alert("Failed to send ❌");
@@ -28,11 +39,48 @@ export default function ContactPage() {
       );
   };
 
+  // =========================
+  // ✅ SKELETON UI (NO CHANGE)
+  // =========================
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0b1220] text-white px-6 md:px-16 py-12 animate-pulse">
+
+        {/* HEADER SKELETON */}
+        <div className="h-10 w-72 bg-gray-700 rounded mb-10"></div>
+
+        {/* MAIN GRID */}
+        <div className="grid md:grid-cols-2 gap-10">
+
+          {/* FORM SKELETON */}
+          <div className="bg-[#111827] p-8 rounded-2xl space-y-5">
+
+            <div className="h-6 w-40 bg-gray-700 rounded"></div>
+
+            <div className="h-12 bg-gray-700 rounded"></div>
+            <div className="h-12 bg-gray-700 rounded"></div>
+            <div className="h-32 bg-gray-700 rounded"></div>
+
+            <div className="h-12 bg-gray-700 rounded"></div>
+
+          </div>
+
+          {/* MAP SKELETON */}
+          <div className="h-[400px] md:h-[500px] bg-gray-700 rounded-2xl"></div>
+
+        </div>
+      </div>
+    );
+  }
+
+  // =========================
+  // ORIGINAL UI (UNCHANGED)
+  // =========================
   return (
     <div className="mb-10 min-h-screen bg-[#0b1220] text-white px-6 md:px-16 py-12">
       
       {/* HEADER */}
-      <div className="max-w-6xl  mb-10">
+      <div className="max-w-6xl mb-10">
         <h1 className="text-4xl md:text-6xl font-bold">
           Let’s <span className="text-green-400">Connect.</span>
         </h1>
@@ -48,7 +96,7 @@ export default function ContactPage() {
           <form ref={form} onSubmit={sendEmail} className="space-y-5">
             <input
               type="text"
-              name="user_name"   // ✅ MUST match EmailJS template
+              name="user_name"
               placeholder="Your Name"
               className="w-full p-3 rounded-lg bg-[#1f2937] border border-gray-700 focus:outline-none focus:border-green-400"
               required
@@ -56,14 +104,14 @@ export default function ContactPage() {
 
             <input
               type="email"
-              name="user_email"  // ✅ MUST match template
+              name="user_email"
               placeholder="Your Email"
               className="w-full p-3 rounded-lg bg-[#1f2937] border border-gray-700 focus:outline-none focus:border-green-400"
               required
             />
 
             <textarea
-              name="message"     // ✅ MUST match template
+              name="message"
               rows="5"
               placeholder="Your Message"
               className="w-full p-3 rounded-lg bg-[#1f2937] border border-gray-700 focus:outline-none focus:border-green-400"
@@ -87,6 +135,7 @@ export default function ContactPage() {
             loading="lazy"
           ></iframe>
         </div>
+
       </div>
     </div>
   );

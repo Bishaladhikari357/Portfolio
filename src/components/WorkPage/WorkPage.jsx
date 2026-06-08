@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import odgnepal from "../../../public/images/odgnepal.png";
 import gym from "../../../public/images/gym.png";
@@ -8,6 +8,15 @@ import foodi_express from "../../../public/images/foodi_express.png";
 
 export default function WorkPage() {
   const [showMore, setShowMore] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const mainProject = {
     title: "ODGNepal E-commerce",
@@ -20,14 +29,14 @@ export default function WorkPage() {
   const rightProjects = [
     {
       title: "GYM Website",
-      desc: "A gym website showcasing fitness services, trainers, and membership options with booking features.",
+      desc: "A gym website showcasing fitness services, trainers, and membership options.",
       tech: ["Next.js", "Tailwind"],
       liveUrl: "https://www.gymequipementandsupplement.com/",
       image: gym,
     },
     {
       title: "Foodi Express",
-      desc: "Food delivery app connecting users with restaurants for browsing menus, ordering, and tracking delivery.",
+      desc: "Food delivery app connecting users with restaurants and ordering system.",
       tech: ["Next.js", "Tailwind CSS"],
       liveUrl: "https://foodie-express-cyan.vercel.app/",
       image: foodi_express,
@@ -51,6 +60,42 @@ export default function WorkPage() {
     },
   ];
 
+  // =========================
+  // SKELETON (UNCHANGED)
+  // =========================
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0b1220] px-4 sm:px-6 md:px-16 py-10 animate-pulse">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+          <div className="space-y-6">
+            <div className="h-6 w-20 bg-gray-700 rounded-full"></div>
+            <div className="h-12 w-72 bg-gray-700 rounded"></div>
+            <div className="h-4 w-96 bg-gray-700 rounded"></div>
+            <div className="bg-gray-800 h-72 rounded-2xl"></div>
+            <div className="h-10 w-40 bg-gray-700 rounded"></div>
+          </div>
+
+          <div className="space-y-6">
+            {[1, 2].map((i) => (
+              <div key={i} className="bg-gray-800 p-6 rounded-2xl space-y-4">
+                <div className="h-40 bg-gray-700 rounded-lg"></div>
+                <div className="h-5 w-40 bg-gray-700 rounded"></div>
+                <div className="h-3 w-full bg-gray-700 rounded"></div>
+                <div className="flex gap-2">
+                  <div className="h-6 w-16 bg-gray-700 rounded"></div>
+                  <div className="h-6 w-16 bg-gray-700 rounded"></div>
+                </div>
+                <div className="h-4 w-24 bg-gray-700 rounded"></div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#0b1220] text-white px-4 sm:px-6 md:px-16 py-10">
 
@@ -60,7 +105,6 @@ export default function WorkPage() {
         {/* LEFT SIDE */}
         <div className="flex flex-col gap-6">
 
-          {/* HEADER */}
           <div>
             <span className="px-4 py-1 text-xs sm:text-sm border border-green-500 rounded-full text-green-400">
               Work
@@ -83,7 +127,7 @@ export default function WorkPage() {
                 src={mainProject.image}
                 alt={mainProject.title}
                 fill
-                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
@@ -96,7 +140,7 @@ export default function WorkPage() {
               {mainProject.desc}
             </p>
 
-            <div className="flex gap-2 sm:gap-3 mt-3 text-xs sm:text-sm text-green-400 flex-wrap">
+            <div className="flex gap-2 mt-3 text-green-400 flex-wrap">
               {mainProject.tech.map((t, i) => (
                 <span key={i}>{t}</span>
               ))}
@@ -105,13 +149,11 @@ export default function WorkPage() {
             <a
               href={mainProject.liveUrl}
               target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 self-start px-4 py-2 bg-green-500 rounded-lg text-black font-medium text-sm"
+              className="mt-5 px-4 py-2 text-center bg-green-500 rounded-lg text-black font-medium text-sm"
             >
               View Live →
             </a>
 
-            {/* BUTTON (desktop only) */}
             <button
               onClick={() => setShowMore(!showMore)}
               className="hidden md:block mt-6 mx-auto bg-green-600 px-4 py-2 rounded-lg text-sm"
@@ -135,6 +177,7 @@ export default function WorkPage() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
@@ -158,7 +201,6 @@ export default function WorkPage() {
               <a
                 href={project.liveUrl}
                 target="_blank"
-                rel="noopener noreferrer"
                 className="mt-4 text-green-400 text-sm hover:underline"
               >
                 View Live →
@@ -166,13 +208,13 @@ export default function WorkPage() {
             </div>
           ))}
 
-          {/* MOBILE BUTTON */}
-         <button
-  onClick={() => setShowMore(!showMore)}
-  className="block md:hidden mx-auto bg-green-600 px-4 py-2 rounded-lg text-sm w-fit"
->
-  {showMore ? "Show Less" : "More Projects"}
-</button>
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="block md:hidden mx-auto bg-green-600 px-4 py-2 rounded-lg text-sm w-fit"
+          >
+            {showMore ? "Show Less" : "More Projects"}
+          </button>
+
         </div>
       </div>
 
@@ -191,13 +233,14 @@ export default function WorkPage() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
                 />
               </div>
 
               <h4 className="font-semibold">{project.title}</h4>
 
-              <p className="text-justifytext-gray-400 text-sm mt-2">
+              <p className="text-gray-400 text-sm mt-2">
                 {project.desc}
               </p>
 
